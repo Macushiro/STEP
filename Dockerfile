@@ -1,6 +1,6 @@
 FROM tiangolo/uwsgi-nginx:python3.10
 
-COPY requirements.txt /app/requirements.txt
+COPY requirements.txt /step/requirements.txt
 
 RUN pip install --upgrade pip
 
