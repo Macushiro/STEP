@@ -1,3 +1,7 @@
+"""
+    Файл конфигурации приложения.
+"""
+
 from django.apps import AppConfig
 
 
