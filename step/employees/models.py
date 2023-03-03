@@ -5,6 +5,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from courses.models import Course
+
 
 class Employee(AbstractUser):
     first_name = models.CharField(
@@ -30,3 +32,4 @@ class Employee(AbstractUser):
         blank=True,
         null=True,
     )
+    courses = models.ManyToManyField(Course)

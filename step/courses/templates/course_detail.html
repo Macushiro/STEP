@@ -13,17 +13,17 @@
         Course description: {{ course.description }}
     </div>
     {% if user.is_authenticated %}
-        {% if users %}
+        {% if employees %}
             <div class="h3">Students:</div>
             <ul class="list-group">
-                {% for user in users %}
+                {% for employee in employees %}
                     <li class="list-group-item">
-                        <strong>{{ user.username }}</strong> with email: <i>{{ user.email }}</i>
+                        <strong>{{ employee.username }}</strong> with email: <i>{{ employee.email }}</i>
                     </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <h3>No students yet</h3>
+            <h3>No employees yet</h3>
         {% endif %}
     {% endif %}
     <a class="btn btn-outline-primary my-3"

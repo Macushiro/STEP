@@ -16,23 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from stafftrain.views import (
-    MainPageView,
+from stafftrain.views import MainPageView, generate_data
+from courses.views import (
     CourseListView,
     CourseDetailView,
     CourseCreateView,
     CourseUpdateView,
     CourseDeleteView,
 )
-from users.views import (
-    UserRegistrationView,
-    UserLoginView,
-    UserLogoutView,
-    UserDetailView,
-    UserUpdateView,
-    UserDeleteView,
-    StudentsListView,
-    generate_data,
+from employees.views import (
+    EmployeeRegistrationView,
+    EmployeeLoginView,
+    EmployeeLogoutView,
+    EmployeeDetailView,
+    EmployeeUpdateView,
+    EmployeeDeleteView,
+    EmployeeListView,
 )
 
 urlpatterns = [
@@ -40,21 +39,20 @@ urlpatterns = [
     path("", MainPageView.as_view(), name="main_page"),
     path("admin/", admin.site.urls),
     path("generate_data/", generate_data, name="generate"),
-    # users
-    path("users/create/", UserRegistrationView.as_view(), name="registration"),
-    path("users/login/", UserLoginView.as_view(), name="login"),
-    path("users/logout/", UserLogoutView.as_view(), name="logout"),
-    path("users/info/", UserDetailView.as_view(), name="user_info"),
-    path("users/update/<int:pk>/", UserUpdateView.as_view(), name="user_update"),
-    path("users/delete/<int:pk>/", UserDeleteView.as_view(), name="user_delete"),
-    # students
-    path("students/list/", StudentsListView.as_view(), name="students_list"),
+    # employees
+    path("employees/list/", EmployeeListView.as_view(), name="employees_list"),
+    path("employees/info/", EmployeeDetailView.as_view(), name="employee_info"),
+    path("employees/create/", EmployeeRegistrationView.as_view(), name="registration"),
+    path("employees/login/", EmployeeLoginView.as_view(), name="login"),
+    path("employees/logout/", EmployeeLogoutView.as_view(), name="logout"),
+    path("employees/update/<int:pk>/", EmployeeUpdateView.as_view(), name="employee_update"),
+    path("employees/delete/<int:pk>/", EmployeeDeleteView.as_view(), name="employee_delete"),
     # courses
-    path("courses/list/", CourseListView.as_view(), name="courses_list"),
-    path("courses/detail/<int:pk>/", CourseDetailView.as_view(), name="course_detail"),
-    path("courses/create/", CourseCreateView.as_view(), name="course_create"),
-    path("courses/update/<int:pk>/", CourseUpdateView.as_view(), name="course_update"),
-    path("courses/delete/<int:pk>/", CourseDeleteView.as_view(), name="course_delete"),
+    path("course/list/", CourseListView.as_view(), name="courses_list"),
+    path("course/detail/<int:pk>/", CourseDetailView.as_view(), name="course_detail"),
+    path("course/create/", CourseCreateView.as_view(), name="course_create"),
+    path("course/update/<int:pk>/", CourseUpdateView.as_view(), name="course_update"),
+    path("course/delete/<int:pk>/", CourseDeleteView.as_view(), name="course_delete"),
     # results
     # path('results/list/', ResultListView.as_view(), name='results'),
 ]

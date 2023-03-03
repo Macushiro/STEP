@@ -5,6 +5,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
+from courses.models import Course
 from employees.models import Employee
 
 
@@ -30,6 +31,12 @@ class RegistrationForm(UserCreationForm):
         label="Пароль/Password:",
         widget=forms.PasswordInput(),
     )
+    course = forms.ModelChoiceField(
+        queryset=Course.objects.filter(is_available=True),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-control"}),
+    )
+
 
     class Meta:
         """
@@ -46,6 +53,7 @@ class RegistrationForm(UserCreationForm):
             "about_me",
             "password1",
             "password2",
+            "courses",
         )
 
 
@@ -71,13 +79,19 @@ class EmployeeUpdateForm(UserChangeForm):
         label="Пароль/Password:",
         widget=forms.PasswordInput(),
     )
+    course = forms.ModelChoiceField(
+        queryset=Course.objects.filter(is_available=True),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-control"}),
+    )
+
+
 
     class Meta:
         """
         Meta for Employee custom model form
         """
         model = Employee
-        # model = Student   - for future functional extending
         fields = (
             "username",
             "email",
@@ -87,4 +101,5 @@ class EmployeeUpdateForm(UserChangeForm):
             "about_me",
             "password1",
             "password2",
+            "courses",
         )

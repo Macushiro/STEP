@@ -2,10 +2,8 @@
     Файл классов-обработчиков запросов к приложению.
 """
 
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
-from django.core import management
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -19,17 +17,6 @@ from django.views.generic import (
 from stafftrain.models import Course
 from employees.forms import RegistrationForm, EmployeeUpdateForm
 from employees.models import Employee
-
-
-@login_required()
-def generate_data(request):
-    """
-    The function for test data generation
-    :param request:
-    :return:
-    """
-    management.call_command("generate_data")
-    return render(request, "index.html")
 
 
 class EmployeeRegistrationView(CreateView):
@@ -57,7 +44,7 @@ class EmployeeLogoutView(LoginRequiredMixin, LogoutView):
     pass
 
 
-class StudentsListView(UserPassesTestMixin, ListView):
+class EmployeeListView(UserPassesTestMixin, ListView):
     """
     Students list controller
     """

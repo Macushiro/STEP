@@ -16,6 +16,8 @@
             <li><strong>Почта/Email: </strong>{{ object.email }}</li>
             <li><strong>Имя/Name: </strong>{{ object.first_name }}</li>
             <li><strong>Фамилия/Last Name: </strong>{{ object.last_name }}</li>
+            <li><strong>Должность/Position: </strong>{{ object.position }}</li>
+            <li><strong>О себе/About me: </strong>{{ object.about_me }}</li>
         </ul>
     </div>
     <a class="btn btn-outline-warning" href="{% url 'employee_update' pk=object.pk %}">Update info</a>
