@@ -3,40 +3,42 @@
 """
 
 from django import forms
-from django.contrib.auth.models import User
-from .models import Course, Result
+
+from courses.models import Course
+from employees.models import Employee
+from .models import Result
 
 
-class CourseModelForm(forms.ModelForm):
-    """
-    Custom form for Course model
-    """
-    name = forms.CharField(
-        label="Наименование курса/Course name",
-        widget=forms.TextInput(attrs={"class": "form-control"}),
-    )
-    description = forms.CharField(
-        label="О курсе/Description",
-        widget=forms.TextInput(attrs={"class": "form-control"}),
-    )
-    is_available = forms.BooleanField(
-        label="Доступен/Available",
-        initial=True,
-        widget=forms.CheckboxInput(attrs={"checked": True}),
-    )
-
-    student = forms.ModelChoiceField(
-        queryset=User.objects.filter(is_staff=False),
-        required=False,
-        widget=forms.Select(attrs={"class": "form-control"}),
-    )
-
-    class Meta:
-        """
-        Meta for Course custom model form
-        """
-        model = Course
-        fields = ("name", "description", "is_available", "student")
+# class CourseModelForm(forms.ModelForm):
+#     """
+#     Custom form for Course model
+#     """
+#     name = forms.CharField(
+#         label="Наименование курса/Course name",
+#         widget=forms.TextInput(attrs={"class": "form-control"}),
+#     )
+#     description = forms.CharField(
+#         label="О курсе/Description",
+#         widget=forms.TextInput(attrs={"class": "form-control"}),
+#     )
+#     is_available = forms.BooleanField(
+#         label="Доступен/Available",
+#         initial=True,
+#         widget=forms.CheckboxInput(attrs={"checked": True}),
+#     )
+#
+#     student = forms.ModelChoiceField(
+#         queryset=User.objects.filter(is_staff=False),
+#         required=False,
+#         widget=forms.Select(attrs={"class": "form-control"}),
+#     )
+#
+#     class Meta:
+#         """
+#         Meta for Course custom model form
+#         """
+#         model = Course
+#         fields = ("name", "description", "is_available", "student")
 
 
 class ResultModelForm(forms.ModelForm):
@@ -45,7 +47,7 @@ class ResultModelForm(forms.ModelForm):
     """
 
     student = forms.ModelChoiceField(
-        queryset=User.objects.filter(is_staff=False),
+        queryset=Employee.objects.filter(is_staff=False),
         widget=forms.Select(attrs={"class": "form-control"}),
     )
     course = forms.ModelChoiceField(

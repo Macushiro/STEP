@@ -4,6 +4,6 @@
 
 from django.contrib import admin
 
-# from users.models import Student
+from employees.models import Employee
 
-# admin.site.register(Student)
+admin.site.register(Employee)

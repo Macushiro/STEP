@@ -1,5 +1,5 @@
 <!--"""-->
-<!--Шаблон/форма подтверждения удаления студента.-->
+<!--Шаблон/форма подтверждения удаления сотрудника.-->
 <!--"""-->
 
 {% extends 'base.html' %}
@@ -7,16 +7,16 @@
 {% block body %}
 
     Do You rely want to delete:
-    <p>User <strong>{{ user.username }}</strong></p>
+    <p>User <strong>{{ employee.username }}</strong></p>
     <span style = "text-decoration: underline">with email:</span>
     <p>
-      {{ user.email}}
+      {{ employee.email}}
     </p>
      ?
   <form method="post">
     {% csrf_token %}
     <button class="btn btn-outline-danger" type="submit">Yes</button>
-    <a class="btn btn-outline-success" href="{% url 'students_list' %}">No</a>
+    <a class="btn btn-outline-success" href="{% url 'employees_list' %}">No</a>
   </form>
 
 {% endblock %}

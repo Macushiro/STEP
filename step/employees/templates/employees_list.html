@@ -1,5 +1,5 @@
 <!--"""-->
-<!--Шаблон списка студентов.-->
+<!--Шаблон списка сотрудников.-->
 <!--"""-->
 
 {% extends "base.html" %}
@@ -8,7 +8,7 @@
 {% endblock %}
 {% block body %}
     {% if user.is_superuser or user.is_staff %}
-        {% if students %}
+        {% if employees %}
             <table class="table table-light table-striped-columns">
                 <thead class="table-warning">
                 <tr>
@@ -20,14 +20,14 @@
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                {% for student in students %}
+                {% for employee in employees %}
                     <tr>
-                        <th scope="row">{{ student.pk }}</th>
-                        <td>{{ student.username }}</td>
-                        <td>{{ student.email }}</td>
+                        <th scope="row">{{ employee.pk }}</th>
+                        <td>{{ employee.username }}</td>
+                        <td>{{ employee.email }}</td>
                         <td>{% if courses %}
                             {% for cour in courses %}
-                                {% if cour.student.pk == student.pk %} /
+                                {% if employee.course.pk == cour.pk %} /
                                     {{ cour.name }}
                                 {% endif %}
                             {% endfor %} /
@@ -35,7 +35,7 @@
                         </td>
                         <td>
                         <span>
-                            <a class="btn btn-danger" href="{% url 'user_delete' pk=student.pk %}">Delete</a>
+                            <a class="btn btn-danger" href="{% url 'employee_delete' pk=employee.pk %}">Delete</a>
                         </span>
                         </td>
                     </tr>
@@ -43,7 +43,7 @@
                 </tbody>
             </table>
         {% else %}
-            <h2>No students yet</h2>
+            <h2>No employees yet</h2>
         {% endif %}
     {% else %}
         <h2>It's page for staff only!</h2>
