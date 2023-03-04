@@ -10,7 +10,6 @@ from django.core.exceptions import BadRequest
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 
-import env
 from courses.models import Course
 from employees.models import Employee
 from stafftrain.models import Result
@@ -28,6 +27,7 @@ course_list = [
     "Scala",
 ]
 course_level = [
+    "for dummies",
     "starter",
     "base",
     "advanced",
@@ -42,14 +42,15 @@ class Command(BaseCommand):
     """
     Custom command for data generation
     """
+
     help = "Generate data"
 
     def handle(self, *args, **options):
         """
         command function
-        :param args: 
-        :param options: 
-        :return: 
+        :param args:
+        :param options:
+        :return:
         """
         print("DB populating has started")
 
@@ -65,7 +66,7 @@ class Command(BaseCommand):
         super_user = Employee.objects.create_superuser(
             username="macushiro",
             email="macushiro@newbie.com",
-            password=env.super_user,
+            password=os.environ.get("superuser_pass"),
         )
         # 2.1 Generate courses data
         rand = random
@@ -93,7 +94,7 @@ class Command(BaseCommand):
                         username=elem["username"],
                         first_name=elem["name"],
                         email=elem["email"],
-                        course=rand.choice(courses)
+                        course=rand.choice(courses),
                     )
                     print(employee.id, employee.username, employee.first_name)
                 except IntegrityError:

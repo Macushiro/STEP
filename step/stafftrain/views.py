@@ -16,6 +16,7 @@ class MainPageView(ListView):
     """
     Main page controller
     """
+
     model = Course
     context_object_name = "courses"
     template_name = "index.html"

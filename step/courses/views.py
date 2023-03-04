@@ -21,6 +21,7 @@ class CourseListView(ListView):
     """
     Courses list controller
     """
+
     model = Course
     context_object_name = "courses"
     template_name = "courses_list.html"
@@ -37,6 +38,7 @@ class CourseDetailView(LoginRequiredMixin, DetailView):
     """
     Course detail info controller
     """
+
     model = Course
     context_object_name = "course"
     template_name = "course_detail.html"
@@ -55,6 +57,7 @@ class CourseCreateView(UserPassesTestMixin, CreateView):
     """
     Course create controller
     """
+
     model = Course
     template_name = "course_form.html"
     form_class = CourseModelForm
@@ -72,6 +75,7 @@ class CourseUpdateView(UserPassesTestMixin, UpdateView):
     """
     Course update info controller
     """
+
     model = Course
     template_name = "course_form.html"
     form_class = CourseModelForm
@@ -89,6 +93,7 @@ class CourseDeleteView(UserPassesTestMixin, DeleteView):
     """
     Course delete controller
     """
+
     model = Course
     template_name = "course_confirm_delete.html"
     success_url = reverse_lazy("courses_list")
