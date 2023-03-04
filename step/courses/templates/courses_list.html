@@ -11,7 +11,9 @@
         <table class="table table-light table-striped-columns">
             <thead class="table-warning">
             <tr>
-                <th scope="col">Course ID</th>
+                {% if user.is_superuser or user.is_staff %}
+                    <th scope="col">Course ID</th>
+                {% endif %}
                 <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Is available</th>
@@ -23,26 +25,28 @@
             <tbody class="table-group-divider">
             {% for course in courses %}
                 <tr>
-                    <th scope="row">{{ course.pk }}</th>
+                    {% if user.is_superuser or user.is_staff %}
+                        <th scope="row">{{ course.pk }}</th>
+                    {% endif %}
                     <td><a class="text-decoration-none"
-                        href="{% url 'course_detail' pk=course.pk %}"
-                        >{{ course.name }}</a>
+                           href="{% url 'course_detail' pk=course.pk %}"
+                    >{{ course.name }}</a>
                     </td>
                     <td>{{ course.description }}</td>
                     <td>{% if course.is_available %}
-                            <em>Yes</em>
-                        {% else %}
-                            <em>No</em>
-                        {% endif %}</td>
+                        <em>Yes</em>
+                    {% else %}
+                        <em>No</em>
+                    {% endif %}</td>
                     {% if user.is_superuser or user.is_staff %}
-                    <td>
+                        <td>
                         <span>
                             <a class="btn btn-warning" href="{% url 'course_update' pk=course.pk %}">Update</a>
                         </span> /
-                        <span>
+                            <span>
                             <a class="btn btn-danger" href="{% url 'course_delete' pk=course.pk %}">Delete</a>
                         </span>
-                    </td>
+                        </td>
                     {% endif %}
                 </tr>
             {% endfor %}
@@ -53,17 +57,11 @@
     {% endif %}
     {% if user.is_superuser %}
         <a class="btn btn-outline-success my-3" href="{% url 'course_create' %}">Create new course</a>
-        <button type="button"
-                class="btn btn-outline-warning my-3"
-                onclick="GenerateData()"
-                id="GenerateData">
-            Generate data
-        </button>
-        <script>
-            function GenerateData() {
-                window.location.href = "{% url 'generate' %}"
-            }
-        </script>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <a class="btn btn-outline-warning my-3"
+           href="{% url 'join_course' pk=user.pk %}"
+        >Join to course</a>
     {% endif %}
     <a class="btn btn-outline-primary my-3"
        href="{% url 'main_page' %}"

@@ -32,4 +32,4 @@ class Employee(AbstractUser):
         blank=True,
         null=True,
     )
-    courses = models.ManyToManyField(Course)
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True, blank=True)

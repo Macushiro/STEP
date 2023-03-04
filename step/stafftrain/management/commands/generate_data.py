@@ -25,6 +25,7 @@ course_list = [
     "HTML/CSS",
     "JQuery",
     "C++",
+    "Scala",
 ]
 course_level = [
     "starter",
@@ -32,6 +33,7 @@ course_level = [
     "advanced",
     "professional",
     "for architects",
+    "for experts",
     "optimization",
 ]
 
@@ -58,36 +60,44 @@ class Command(BaseCommand):
         Employee.objects.all().delete()
 
         # 2. Generate base data
-        print("Generating base data")
+        print("Generating examples data")
+        # 2.0 Create superuser
         super_user = Employee.objects.create_superuser(
             username="macushiro",
             email="macushiro@newbie.com",
             password=env.super_user,
         )
+        # 2.1 Generate courses data
+        rand = random
+        for course in course_list:
+            try:
+                course_name = rand.choice(course_list)
+                course = Course.objects.create(
+                    name=course_name,
+                    description=f"{course_name} {rand.choice(course_level)} course",
+                    is_available=True,
+                )
+                print(course.name, course.description)
+            except IntegrityError:
+                raise BadRequest(f"Couldn't write data into Database.")
+        courses = Course.objects.all()
 
-        # 2.1 Getting data from external service
+        # 2.2 Getting data from external service
         with requests.session() as session:
             response = session.get(USERS_DATA_URL)
             data = response.json()
-            rand = random
+            # 2.3 Generate employees data
             for elem in data:
                 try:
                     employee = Employee.objects.create(
                         username=elem["username"],
                         first_name=elem["name"],
                         email=elem["email"],
+                        course=rand.choice(courses)
                     )
-                    # 2.2 Generate courses data
                     print(employee.id, employee.username, employee.first_name)
-                    course_name = rand.choice(course_list)
-                    course = Course.objects.create(
-                        name=course_name,
-                        description=f"{course_name} {rand.choice(course_level)} course",
-                        is_available=True,
-                    )
-                    print(course.name, course.description)
                 except IntegrityError:
-                    raise BadRequest(f"Couldn't delete previous data from Database.")
+                    raise BadRequest(f"Couldn't write data into Database.")
 
         # 3. Generate results data  -  for feature working
         # min_employee_id = Employee.objects.order_by('id').first()

@@ -15,7 +15,7 @@ from django.views.generic import (
 )
 
 from stafftrain.models import Course
-from employees.forms import RegistrationForm, EmployeeUpdateForm
+from employees.forms import RegistrationForm, EmployeeUpdateForm, EmployeeCourseJoinForm
 from employees.models import Employee
 
 
@@ -23,7 +23,6 @@ class EmployeeRegistrationView(CreateView):
     """
     Employee registration controller
     """
-    # model = Student   - for future functional extending
     model = Employee
     form_class = RegistrationForm
     success_url = "/"
@@ -73,6 +72,7 @@ class EmployeeListView(UserPassesTestMixin, ListView):
         """
         context = super().get_context_data(**kwargs)
         context["courses"] = Course.objects.all()
+        print(context["courses"])
         return context
 
 
@@ -81,15 +81,6 @@ class EmployeeDetailView(LoginRequiredMixin, TemplateView):
     Employee detail info controller
     """
     template_name = "employee_detail.html"
-
-    def get_context_data(self, **kwargs):
-        """
-        Function for context extension
-        :return:
-        """
-        context = super().get_context_data(**kwargs)
-        context["object"] = self.request.user
-        return context
 
 
 class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
@@ -100,6 +91,16 @@ class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "employee_update_form.html"
     form_class = EmployeeUpdateForm
     success_url = reverse_lazy("employee_info")
+
+
+class EmployeeJoinCourseView(LoginRequiredMixin, UpdateView):
+    """
+    Employee info updating controller
+    """
+    model = Employee
+    template_name = "employee_join_course_form.html"
+    form_class = EmployeeCourseJoinForm
+    success_url = reverse_lazy("courses_list")
 
 
 class EmployeeDeleteView(UserPassesTestMixin, DeleteView):

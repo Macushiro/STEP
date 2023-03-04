@@ -32,6 +32,7 @@ from employees.views import (
     EmployeeUpdateView,
     EmployeeDeleteView,
     EmployeeListView,
+    EmployeeJoinCourseView,
 )
 
 urlpatterns = [
@@ -46,6 +47,7 @@ urlpatterns = [
     path("employees/login/", EmployeeLoginView.as_view(), name="login"),
     path("employees/logout/", EmployeeLogoutView.as_view(), name="logout"),
     path("employees/update/<int:pk>/", EmployeeUpdateView.as_view(), name="employee_update"),
+    path("employees/join/<int:pk>/", EmployeeJoinCourseView.as_view(), name="join_course"),
     path("employees/delete/<int:pk>/", EmployeeDeleteView.as_view(), name="employee_delete"),
     # courses
     path("course/list/", CourseListView.as_view(), name="courses_list"),

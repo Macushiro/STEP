@@ -1,5 +1,5 @@
 <!--"""-->
-<!--Шаблон списка студентов.-->
+<!--Шаблон списка сотрудников.-->
 <!--"""-->
 
 {% extends "base.html" %}
@@ -27,7 +27,7 @@
                         <td>{{ employee.email }}</td>
                         <td>{% if courses %}
                             {% for cour in courses %}
-                                {% if cour.employee.pk == employee.pk %} /
+                                {% if employee.course.pk == cour.pk %} /
                                     {{ cour.name }}
                                 {% endif %}
                             {% endfor %} /

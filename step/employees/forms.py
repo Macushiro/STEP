@@ -53,7 +53,7 @@ class RegistrationForm(UserCreationForm):
             "about_me",
             "password1",
             "password2",
-            "courses",
+            "course",
         )
 
 
@@ -86,7 +86,6 @@ class EmployeeUpdateForm(UserChangeForm):
     )
 
 
-
     class Meta:
         """
         Meta for Employee custom model form
@@ -101,5 +100,26 @@ class EmployeeUpdateForm(UserChangeForm):
             "about_me",
             "password1",
             "password2",
-            "courses",
+            "course",
+        )
+
+
+class EmployeeCourseJoinForm(UserChangeForm):
+    """
+    Custom form for Employee model object updating
+    """
+    course = forms.ModelChoiceField(
+        queryset=Course.objects.filter(is_available=True),
+        required=False,
+        widget=forms.Select(attrs={"class": "form-control"}),
+    )
+
+
+    class Meta:
+        """
+        Meta for Employee custom model form
+        """
+        model = Employee
+        fields = (
+            "course",
         )

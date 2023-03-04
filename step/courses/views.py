@@ -1,3 +1,7 @@
+"""
+    Файл моделей приложения.
+"""
+
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -26,7 +30,7 @@ class CourseListView(ListView):
         The function of obtaining objects of the Course model
         :return:
         """
-        return Course.objects.all()
+        return Course.objects.filter(is_available=True)
 
 
 class CourseDetailView(LoginRequiredMixin, DetailView):
@@ -43,8 +47,7 @@ class CourseDetailView(LoginRequiredMixin, DetailView):
         :return:
         """
         context = super().get_context_data(**kwargs)
-        # context["employees"] = Employee.objects.filter(course__id=self.get_object().id)
-        context["employees"] = Employee.objects.all()
+        context["employees"] = Employee.objects.filter(course__id=self.get_object().id)
         return context
 
 

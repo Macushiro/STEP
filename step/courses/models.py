@@ -1,3 +1,7 @@
+"""
+    Файл моделей приложения.
+"""
+
 from django.db import models
 
 
@@ -17,3 +21,6 @@ class Course(models.Model):
     is_available = models.BooleanField(
         verbose_name="Доступен/Available", blank=True, null=True
     )
+
+    def __str__(self):
+        return f'{self.name} {self.description}'

@@ -4,7 +4,6 @@
 
 from django import forms
 
-from employees.models import Employee
 from .models import Course
 
 
