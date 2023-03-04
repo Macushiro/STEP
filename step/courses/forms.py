@@ -11,6 +11,7 @@ class CourseModelForm(forms.ModelForm):
     """
     Custom form for Course model
     """
+
     name = forms.CharField(
         label="Наименование курса/Course name",
         widget=forms.TextInput(attrs={"class": "form-control"}),
@@ -25,10 +26,10 @@ class CourseModelForm(forms.ModelForm):
         widget=forms.CheckboxInput(attrs={"checked": True}),
     )
 
-
     class Meta:
         """
         Meta for Course custom model form
         """
+
         model = Course
         fields = ("name", "description", "is_available")

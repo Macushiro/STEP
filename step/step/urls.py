@@ -41,14 +41,24 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("generate_data/", generate_data, name="generate"),
     # employees
-    path("employees/list/", EmployeeListView.as_view(), name="employees_list"),
-    path("employees/info/", EmployeeDetailView.as_view(), name="employee_info"),
-    path("employees/create/", EmployeeRegistrationView.as_view(), name="registration"),
-    path("employees/login/", EmployeeLoginView.as_view(), name="login"),
-    path("employees/logout/", EmployeeLogoutView.as_view(), name="logout"),
-    path("employees/update/<int:pk>/", EmployeeUpdateView.as_view(), name="employee_update"),
-    path("employees/join/<int:pk>/", EmployeeJoinCourseView.as_view(), name="join_course"),
-    path("employees/delete/<int:pk>/", EmployeeDeleteView.as_view(), name="employee_delete"),
+    path("employee/list/", EmployeeListView.as_view(), name="employees_list"),
+    path("employee/info/", EmployeeDetailView.as_view(), name="employee_info"),
+    path("employee/create/", EmployeeRegistrationView.as_view(), name="registration"),
+    path("employee/login/", EmployeeLoginView.as_view(), name="login"),
+    path("employee/logout/", EmployeeLogoutView.as_view(), name="logout"),
+    path(
+        "employee/update/<int:pk>/",
+        EmployeeUpdateView.as_view(),
+        name="employee_update",
+    ),
+    path(
+        "employee/join/<int:pk>/", EmployeeJoinCourseView.as_view(), name="join_course"
+    ),
+    path(
+        "employee/delete/<int:pk>/",
+        EmployeeDeleteView.as_view(),
+        name="employee_delete",
+    ),
     # courses
     path("course/list/", CourseListView.as_view(), name="courses_list"),
     path("course/detail/<int:pk>/", CourseDetailView.as_view(), name="course_detail"),

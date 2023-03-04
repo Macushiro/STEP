@@ -66,5 +66,6 @@ class ResultModelForm(forms.ModelForm):
         """
         Meta for Result custom model form
         """
+
         model = Result
         fields = ("student", "course", "percent", "test_result")

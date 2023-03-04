@@ -23,6 +23,7 @@ class EmployeeRegistrationView(CreateView):
     """
     Employee registration controller
     """
+
     model = Employee
     form_class = RegistrationForm
     success_url = "/"
@@ -33,6 +34,7 @@ class EmployeeLoginView(LoginView):
     """
     Employee login controller
     """
+
     template_name = "login_form.html"
 
 
@@ -40,6 +42,7 @@ class EmployeeLogoutView(LoginRequiredMixin, LogoutView):
     """
     Employee logout controller
     """
+
     pass
 
 
@@ -47,6 +50,7 @@ class EmployeeListView(UserPassesTestMixin, ListView):
     """
     Students list controller
     """
+
     model = Employee
     context_object_name = "employees"
     template_name = "employees_list.html"
@@ -80,6 +84,7 @@ class EmployeeDetailView(LoginRequiredMixin, TemplateView):
     """
     Employee detail info controller
     """
+
     template_name = "employee_detail.html"
 
 
@@ -87,6 +92,7 @@ class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     """
     Employee info updating controller
     """
+
     model = Employee
     template_name = "employee_update_form.html"
     form_class = EmployeeUpdateForm
@@ -97,6 +103,7 @@ class EmployeeJoinCourseView(LoginRequiredMixin, UpdateView):
     """
     Employee info updating controller
     """
+
     model = Employee
     template_name = "employee_join_course_form.html"
     form_class = EmployeeCourseJoinForm
@@ -107,6 +114,7 @@ class EmployeeDeleteView(UserPassesTestMixin, DeleteView):
     """
     Employee deleting controller
     """
+
     model = Employee
     template_name = "employee_confirm_delete.html"
     success_url = reverse_lazy("employees_list")

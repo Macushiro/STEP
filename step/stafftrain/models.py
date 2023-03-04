@@ -12,6 +12,7 @@ class Result(models.Model):
     """
     Result model description
     """
+
     percent = models.DecimalField(
         verbose_name="Процент прохождения/Completion percent",
         decimal_places=1,

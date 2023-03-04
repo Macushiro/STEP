@@ -9,6 +9,7 @@ class Course(models.Model):
     """
     Course model description
     """
+
     name = models.CharField(
         verbose_name="Наименование курса/Course name",
         max_length=256,
@@ -23,4 +24,4 @@ class Course(models.Model):
     )
 
     def __str__(self):
-        return f'{self.name} {self.description}'
+        return f"{self.name} {self.description}"
