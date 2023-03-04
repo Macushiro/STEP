@@ -24,7 +24,7 @@ jobs:
     - name: Run Tests
       env:
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        superuser_pass: ${{ secrets.superuser_pass }}
+        superuser_pass: ${{ secrets.SUPERUSER_PASS }}
       run: |
         cd step/
         python manage.py test
